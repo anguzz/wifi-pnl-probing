@@ -8,19 +8,17 @@ A CLI-based exploration into wireless probe request capturing and geolocation in
 ```powershell
 WiFi-Probing/
 ├── .env
+├── .env_example
 ├── .gitignore
 ├── readme.md
+├── todo.md
 ├── __pycache__/
-├── linux/
-│   ├── capture_filtered.py
-│   ├── capture_all.py
-│   │   └── probe_requests_log.csv (generated)
+├── probe/
+│   ├── main.py
 │   ├── configure_nic.sh
-│   └── run_wigle_on_csv.py
-│       └── probe_requests_with_wigle_loc.csv (generated)
-├── windows/
-│   ├── capture.py
-│   └── configure_nic_windows.ps1
+│   ├── run_wigle_on_csv.py
+│   ├── mac-vendor.txt
+│   └── probe_requests_log.csv (generated)
 ├── utils/
 │   ├── mac-vendor.txt
 │   └── requirements.txt        
@@ -30,24 +28,28 @@ WiFi-Probing/
 ## Usage Notes
 
 ###  Linux :
+
+Setup command 
+
+Open a terminal and install these packages
+`sudo apt update && sudo apt install -y iw aircrack-ng iproute2 iputils-ping` 
+
+now a lazy global install for scapy
+`apt install python3-scapy`
+`apt install python3-dotenv`
+make channel hopper executable?
+chmod +x channel_hopper.sh
+
+
 Steps:
 
 1) Run configure_nic.sh to set your interface to monitor mode.
+- sets wifi card to monitor mode, saves interface name in .env for easier use 
+
 2) Update the interface name in capture.py and start capturing.
 3) Optionally, run python3 run_wigle_on_csv.py to enrich captured SSIDs with geolocation (use cautiously due to rate limits).
 
-### Windows (work in progress)
 
-1) Configure NIC to monitor mode with Npcap: `configure_nic_windows.ps1` attempts to streamline this process.
-2) Call `C:\Windows\System32\Npcap\WlanHelper.exe Wi-Fi mode monitor` to put the card in monitor mode.
-3) Run capture.py (channel hopping is currently a limitation on Windows preventing me from capturing any requests)  
- 
-### Next steps for linux
-- Similar to the (https://github.com/mgp25/Probe-Hunter)  I want implement real-time SSID geolocation with WiGLE API:
- 1) Option 1: Use a NIC supporting Virtual Functions (VFs).
- 2) Option 2: Use dual NIC setup one for monitoring, one for internet connectivity.
-- Rate limiting on WiGLE poses a current challenge, so I'll need to look into workarounds or ways to increase maximum daily API calls.
-- Make the menu more comprehensive, better formatted. 
 
 ### Target setup 
 Raspberry Pi 3B with ALFA Network AWUS036ACM Wi-Fi dongle, touch screen LCD, and battery power for portability. Aim to streamline scripts for NIC configuration, automated packet capture, and real-time display at system startup.
@@ -64,14 +66,6 @@ Raspberry Pi 3B with ALFA Network AWUS036ACM Wi-Fi dongle, touch screen LCD, and
 - Monitor Mode: wireless NIC can only passively listen to all 802.11 traffic in the air. Has no output connection though
 - Managed Mode: Standard mode for network connections
 
-# helper commands
-windows:
-- `netsh wlan show interfaces` 
-- `netsh wlan show wirelesscapabilities`
-- `WlanHelper Wi-Fi mode managed` 
-- `WlanHelper Wi-Fi mode`
-
-linux: 
 
 # References
 Some stuff I read while tinkering with this. 

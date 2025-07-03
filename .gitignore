@@ -3,3 +3,5 @@ __pycache__
 linux/probe_requests_log.csv
 linux/probe_requests_with_wigle_loc.csv
 windows/probe_requests_log.csv
+probe/probe_requests_log.csv
+probe/probe_requests_with_wigle_loc.csv
