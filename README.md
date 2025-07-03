@@ -103,6 +103,10 @@ Some stuff I read while tinkering with this.
 ![image](https://github.com/user-attachments/assets/0723315e-4e53-4282-a505-e7cddbf0c2c6)
 
 
+Changes 7/2/25
+![image](https://github.com/user-attachments/assets/4de12bca-d190-418f-8e3c-1bca13f5d5e2)
+
+
 Disclaimer:
 This project is intended for educational and research purposes only. Do not use it for unauthorized network monitoring or data collection. Always ensure you have proper permission before scanning wireless networks.
 
