@@ -37,8 +37,7 @@ Open a terminal and install these packages
 now a lazy global install for scapy
 `apt install python3-scapy`
 `apt install python3-dotenv`
-make channel hopper executable?
-chmod +x channel_hopper.sh
+
 
 
 Steps:
